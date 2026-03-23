@@ -49,14 +49,16 @@ function Header() {
     }, [debounce]);
 
     return (
-        <header className="bg-white shadow-md border-b border-gray-200">
-            <div className="w-[90%] mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between h-16">
+        <div className="bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-200/50 w-full transition-all duration-300">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex items-center justify-between h-16 sm:h-20">
                     {/* Logo */}
                     <Link to={'/'}>
-                        <div className="flex items-center">
-                            <div className="flex-shrink-0">
-                                <h1 className="text-2xl font-bold text-blue-600">📚 Thư Viện</h1>
+                        <div className="flex items-center group">
+                            <div className="flex-shrink-0 bg-blue-600/10 px-3 py-1.5 rounded-xl group-hover:bg-blue-600/20 transition-colors">
+                                <h1 className="text-xl sm:text-2xl font-black bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent drop-shadow-sm">
+                                    📚 Thư Viện
+                                </h1>
                             </div>
                         </div>
                     </Link>
@@ -85,7 +87,7 @@ function Header() {
                                 onFocus={() => setIsResultVisible(true)}
                                 onBlur={() => setTimeout(() => setIsResultVisible(false), 200)} // Delay to allow click on results
                                 placeholder="Tìm kiếm sách, tác giả..."
-                                className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                className="block w-full pl-10 pr-3 py-2 sm:py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 focus:bg-white transition-all duration-300 shadow-inner"
                             />
                         </div>
                         {isResultVisible && searchResults.length > 0 && (
@@ -173,12 +175,12 @@ function Header() {
                             // Login/Register Buttons
                             <>
                                 <Link to={'/login'}>
-                                    <Button className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                                    <Button type="text" className="text-slate-600 hover:text-blue-600 font-medium transition-colors px-4 rounded-xl">
                                         Đăng nhập
                                     </Button>
                                 </Link>
                                 <Link to={'/register'}>
-                                    <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                                    <button className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-5 py-2 sm:py-2.5 rounded-xl text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5">
                                         Đăng ký
                                     </button>
                                 </Link>
@@ -187,7 +189,7 @@ function Header() {
                     </div>
                 </div>
             </div>
-        </header>
+        </div>
     );
 }
 

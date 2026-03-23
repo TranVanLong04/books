@@ -19,15 +19,15 @@ function CardBody({ data }) {
     };
 
     return (
-        <div className="h-full bg-gradient-to-br from-white to-blue-50/30 rounded-xl shadow-sm border border-gray-100 hover:shadow-xl hover:border-blue-300 hover:from-blue-50/50 hover:to-purple-50/30 transition-all duration-300 overflow-hidden group relative">
+        <div className="h-full bg-white rounded-2xl shadow-sm border border-slate-200/60 hover:shadow-2xl hover:border-blue-300 transition-all duration-500 overflow-hidden group relative flex flex-col hover:-translate-y-1">
             {/* Decorative gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0"></div>
             {/* Ảnh sách */}
             <Link to={`/product/${data.id}`}>
-                <div className="relative overflow-hidden">
+                <div className="relative overflow-hidden aspect-[3/4] bg-slate-50 border-b border-slate-100">
                     <img
                         src={`${import.meta.env.VITE_API_URL_IMAGE}/${data.image}`}
-                        className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
+                        className="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500 p-2"
                         alt={data.nameProduct}
                     />
                     {/* Stock badge */}
@@ -57,26 +57,26 @@ function CardBody({ data }) {
                 </div>
             </Link>
 
-            <div className="p-4 flex flex-col h-[calc(100%-14rem)] relative z-10">
+            <div className="p-5 flex flex-col flex-grow relative z-10">
                 {/* Tên sách */}
                 <Link to={`/product/${data.id}`}>
-                    <h6 className="text-gray-800 font-bold mb-3 text-sm leading-tight hover:text-transparent hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:bg-clip-text transition-all duration-300 line-clamp-2">
+                    <h6 className="text-slate-800 font-bold mb-4 text-base leading-snug group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-indigo-600 group-hover:bg-clip-text transition-all duration-300 line-clamp-2">
                         {data.nameProduct}
                     </h6>
                 </Link>
 
                 {/* Thông tin chi tiết */}
-                <div className="space-y-2.5 mb-4 flex-grow">
+                <div className="space-y-3 mb-6 flex-grow">
                     {/* Nhà xuất bản */}
-                    <div className="flex items-center text-xs text-gray-600 bg-gradient-to-r from-blue-50 to-indigo-50 p-2 rounded-lg border border-blue-100/50">
-                        <FontAwesomeIcon icon={faUser} className="mr-2 w-3 text-blue-500" />
+                    <div className="flex items-center text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-100 group-hover:bg-blue-50/50 group-hover:border-blue-100/50 transition-colors">
+                        <FontAwesomeIcon icon={faUser} className="mr-2 w-3 text-blue-500/70" />
                         <span className="truncate font-medium">{data.publisher}</span>
                     </div>
 
                     {/* Công ty phát hành */}
                     {data.publishingCompany && (
-                        <div className="flex items-center text-xs text-gray-600 bg-gradient-to-r from-purple-50 to-pink-50 p-2 rounded-lg border border-purple-100/50">
-                            <FontAwesomeIcon icon={faBuilding} className="mr-2 w-3 text-purple-500" />
+                        <div className="flex items-center text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-100 group-hover:bg-purple-50/50 group-hover:border-purple-100/50 transition-colors">
+                            <FontAwesomeIcon icon={faBuilding} className="mr-2 w-3 text-purple-500/70" />
                             <span className="truncate font-medium">{data.publishingCompany}</span>
                         </div>
                     )}
@@ -95,8 +95,8 @@ function CardBody({ data }) {
 
                     {/* Ngôn ngữ */}
                     {data.language && (
-                        <div className="flex items-center text-xs text-gray-600 bg-gradient-to-r from-teal-50 to-cyan-50 p-2 rounded-lg border border-teal-100/50">
-                            <FontAwesomeIcon icon={faLanguage} className="mr-2 w-3 text-teal-500" />
+                        <div className="flex items-center text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-100 transition-colors">
+                            <FontAwesomeIcon icon={faLanguage} className="mr-2 w-3 text-teal-500/70" />
                             <span className="font-medium">{data.language}</span>
                         </div>
                     )}
@@ -107,10 +107,10 @@ function CardBody({ data }) {
                     <button
                         onClick={() => showModal(data)}
                         disabled={data.stock <= 0}
-                        className={`w-full py-3 px-4 rounded-xl text-sm font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 ${
+                        className={`w-full py-3 px-4 rounded-xl text-sm font-bold tracking-wide transition-all duration-300 transform active:scale-95 ${
                             data.stock > 0
-                                ? 'bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-600 hover:from-blue-600 hover:via-blue-700 hover:to-indigo-700 text-white shadow-lg hover:shadow-xl border border-blue-400/30'
-                                : 'bg-gradient-to-r from-gray-300 to-gray-400 text-gray-600 cursor-not-allowed shadow-sm'
+                                ? 'bg-slate-900 hover:bg-blue-600 text-white shadow-md hover:shadow-xl border border-transparent'
+                                : 'bg-slate-100 text-slate-400 cursor-not-allowed'
                         }`}
                     >
                         {data.stock > 0 ? '📚 Mượn ngay' : '❌ Hết hàng'}
