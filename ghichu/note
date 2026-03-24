@@ -1,0 +1,11 @@
+# Build images
+docker-compose build
+
+# Chạy tất cả services (background)
+docker-compose up -d
+
+# Xem logs
+docker-compose logs -f
+
+# Xem container đang chạy
+docker ps
