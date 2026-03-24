@@ -1,11 +1,14 @@
 import axios from 'axios';
-
 import { apiClient } from './axiosClient';
 
+// Sửa baseURL cho request
 const request = axios.create({
-    baseURL: import.meta.env.VITE_API_URL,
+    baseURL: import.meta.env.VITE_API_URL,  // http://localhost:3000
     withCredentials: true,
 });
+
+// Đảm bảo apiClient cũng dùng baseURL tương tự
+// (nếu apiClient đã được cấu hình đúng trong axiosClient.jsx thì không cần sửa)
 
 const apiUser = '/api/user';
 
@@ -102,6 +105,7 @@ export const requestStatistics = async () => {
 /// product
 const apiProduct = '/api/product';
 export const requestGetAllProduct = async () => {
+    // Sửa: dùng request thay vì apiClient để đồng nhất
     const res = await request.get(`${apiProduct}/get-all`);
     return res.data;
 };
