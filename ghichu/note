@@ -9,3 +9,12 @@ docker-compose logs -f
 
 # Xem container đang chạy
 docker ps
+
+
+GIT
+
+# Tạo và chuyển sang nhánh mới
+git checkout -b ten_nhanh_moi
+
+# 1. Xem nhánh hiện tại
+git branch
