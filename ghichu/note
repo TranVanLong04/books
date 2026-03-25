@@ -18,3 +18,12 @@ git checkout -b ten_nhanh_moi
 
 # 1. Xem nhánh hiện tại
 git branch
+
+muốn merge long vào master:
+
+bash
+# Chuyển sang master
+git checkout master
+
+# Merge long vào master
+git merge long

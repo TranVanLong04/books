@@ -5,6 +5,7 @@ import { UserOutlined, LogoutOutlined, SettingOutlined, HistoryOutlined, SendOut
 import { useEffect, useState } from 'react';
 import useDebounce from '../hooks/useDebounce';
 import { requestLogout, requestSearchProduct } from '../config/request';
+import logo from '../assets/images/logo.webp';
 
 function Header() {
     const { dataUser } = useStore();
@@ -55,15 +56,54 @@ function Header() {
                     {/* Logo */}
                     <Link to={'/'}>
                         <div className="flex items-center group">
-                            <div className="flex-shrink-0 bg-blue-600/10 px-3 py-1.5 rounded-xl group-hover:bg-blue-600/20 transition-colors">
-                                <h1 className="text-xl sm:text-2xl font-black bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent drop-shadow-sm">
-                                    📚 Thư Viện
-                                </h1>
+                            <div className="flex-shrink-0 transition-transform group-hover:scale-105 duration-300">
+                                <img src={logo} alt="Thư Viện Logo" className="h-10 sm:h-12 w-auto object-contain drop-shadow-sm" />
                             </div>
                         </div>
                     </Link>
+
+                    {/* Navigation Menu */}
+                    <nav className="hidden lg:flex items-center space-x-8 ml-10">
+                        <a 
+                            href="/#danh-sach-sach" 
+                            onClick={(e) => {
+                                if (window.location.pathname === '/') {
+                                    e.preventDefault();
+                                    document.getElementById('danh-sach-sach')?.scrollIntoView({ behavior: 'smooth' });
+                                }
+                            }}
+                            className="text-slate-600 hover:text-blue-600 font-bold transition-colors text-base cursor-pointer"
+                        >
+                            Mượn sách
+                        </a>
+                        <a 
+                            href="/#quy-dinh"
+                            onClick={(e) => {
+                                if (window.location.pathname === '/') {
+                                    e.preventDefault();
+                                    document.getElementById('quy-dinh')?.scrollIntoView({ behavior: 'smooth' });
+                                }
+                            }}
+                            className="text-slate-600 hover:text-blue-600 font-bold transition-colors text-base cursor-pointer"
+                        >
+                            Quy định
+                        </a>
+                        <a 
+                            href="/#lien-he"
+                            onClick={(e) => {
+                                if (window.location.pathname === '/') {
+                                    e.preventDefault();
+                                    document.getElementById('lien-he')?.scrollIntoView({ behavior: 'smooth' });
+                                }
+                            }}
+                            className="text-slate-600 hover:text-blue-600 font-bold transition-colors text-base cursor-pointer"
+                        >
+                            Liên hệ
+                        </a>
+                    </nav>
+
                     {/* Search Bar */}
-                    <div className="flex-1 max-w-lg mx-8 relative">
+                    <div className="flex-1 max-w-md xl:max-w-lg mx-6 relative">
                         <div className="relative">
                             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <svg
