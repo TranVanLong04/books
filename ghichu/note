@@ -16,7 +16,10 @@ GIT
 # Tạo và chuyển sang nhánh mới
 git checkout -b ten_nhanh_moi
 
-# 1. Xem nhánh hiện tại
+# Đẩy branch mới lên remote
+git push -u origin "ten nhanh moi"
+
+# 1. Xem nhánh hiện tại         
 git branch
 
 muốn merge long vào master:
@@ -27,3 +30,6 @@ git checkout master
 
 # Merge long vào master
 git merge long
+
+# Lấy nhánh mới từ remote về(muốn sử dụng brand của mem khác)
+git fetch
