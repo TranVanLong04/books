@@ -33,3 +33,29 @@ git merge long
 
 # Lấy nhánh mới từ remote về(muốn sử dụng brand của mem khác)
 git fetch
+
+# Quay lại commit cũ
+git checkout <id commit>
+git reset --hard <id commit>
+git push origin develop --force
+git push origin develop
+
+Khi bắt đầu làm tính năng mới:
+# Từ develop tạo branch mới
+git checkout develop
+git pull origin develop
+git checkout -b feature/dang-nhap-facebook
+
+Khi làm xong tính năng:
+bash
+# Đẩy code lên remote
+git push origin feature/dang-nhap-facebook
+
+# Tạo Pull Request (hoặc merge trực tiếp) để merge vào develop
+git checkout develop
+git pull origin develop
+git merge feature/dang-nhap-facebook
+
+# Xóa branch feature (cả local và remote)
+git branch -d feature/dang-nhap-facebook          # xóa local
+git push origin --delete feature/dang-nhap-facebook  # xóa remote

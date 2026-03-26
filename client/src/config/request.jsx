@@ -110,6 +110,11 @@ export const requestGetAllProduct = async () => {
     return res.data;
 };
 
+export const requestGetTopBorrowedProduct = async () => {
+    const res = await request.get(`${apiProduct}/get-top-borrowed`);
+    return res.data;
+};
+
 export const requestGetOneProduct = async (id) => {
     const res = await request.get(`${apiProduct}/get-one?id=${id}`);
     return res.data;
