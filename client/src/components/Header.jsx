@@ -76,18 +76,12 @@ function Header() {
                         >
                             Mượn sách
                         </a>
-                        <a 
-                            href="/#quy-dinh"
-                            onClick={(e) => {
-                                if (window.location.pathname === '/') {
-                                    e.preventDefault();
-                                    document.getElementById('quy-dinh')?.scrollIntoView({ behavior: 'smooth' });
-                                }
-                            }}
+                       <Link 
+                            to="/noi-quy"
                             className="text-slate-600 hover:text-blue-600 font-bold transition-colors text-base cursor-pointer"
                         >
-                            Quy định
-                        </a>
+                             Quy định
+                        </Link>
                         <a 
                             href="/#lien-he"
                             onClick={(e) => {

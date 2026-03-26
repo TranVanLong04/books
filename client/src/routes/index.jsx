@@ -5,6 +5,7 @@ import RegisterUser from '../pages/RegisterUser';
 import Admin from '../pages/DashbroadComponents/index';
 import InfoUser from '../pages/InfoUser';
 import ForgotPassword from '../pages/ForgotPassword';
+import NoiQuy from '../pages/NoiQuy';
 export const routes = [
     {
         path: '/',
@@ -33,5 +34,11 @@ export const routes = [
     {
         path: '/forgot-password',
         component: <ForgotPassword />,
+    },
+
+    
+    {
+        path: '/noi-quy',
+        component: <NoiQuy />,
     },
 ];
