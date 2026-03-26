@@ -95,7 +95,11 @@ function DetailProduct() {
                 <nav className="flex items-center space-x-2 text-sm text-slate-500 font-medium bg-white/50 px-4 py-2 rounded-xl inline-flex backdrop-blur-md border border-white/60 shadow-sm">
                     <Link to={'/'} className="hover:text-blue-600 transition-colors">Trang chủ</Link>
                     <span>/</span>
-                    <Link to={'/product'} className="hover:text-blue-600 transition-colors">Kho sách</Link>
+                    <Link to={'/'} onClick={() => {
+                        setTimeout(() => {
+                            document.getElementById('danh-sach-sach')?.scrollIntoView({ behavior: 'smooth' });
+                        }, 100);
+                    }} className="hover:text-blue-600 transition-colors">Kho sách</Link>
                     <span>/</span>
                     <span className="text-blue-700 font-semibold">{dataProduct.nameProduct || 'Chi tiết'}</span>
                 </nav>

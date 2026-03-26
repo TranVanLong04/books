@@ -2,20 +2,27 @@ import { useEffect } from 'react';
 import CardBody from './components/Cardbody';
 import Footer from './components/Footer';
 import Header from './components/Header';
-import { requestGetAllProduct } from './config/request';
+import TopBorrowedBooks from './components/TopBorrowedBooks';
+import { requestGetAllProduct, requestGetTopBorrowedProduct } from './config/request';
 import { useState } from 'react';
 
 function App() {
     const [dataProduct, setDataProduct] = useState([]);
+    const [topBorrowedBooks, setTopBorrowedBooks] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await requestGetAllProduct();
-                setDataProduct(res?.metadata || []);
+                const [resProducts, resTopBooks] = await Promise.all([
+                    requestGetAllProduct(),
+                    requestGetTopBorrowedProduct()
+                ]);
+                setDataProduct(resProducts?.metadata || []);
+                setTopBorrowedBooks(resTopBooks?.metadata || []);
             } catch (error) {
                 console.error("Failed to fetch products. Backend might be offline.", error);
                 setDataProduct([]);
+                setTopBorrowedBooks([]);
             }
         };
         fetchData();
@@ -60,6 +67,9 @@ function App() {
                     <CardBody key={item.id} data={item} />
                 ))}
             </main>
+
+            {/* Top Borrowed Books Section */}
+            <TopBorrowedBooks books={topBorrowedBooks} />
 
             {/* Rules Section */}
             <section id="quy-dinh" className="bg-white py-16 border-t border-slate-200">

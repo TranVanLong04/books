@@ -67,6 +67,62 @@ class controllerProduct {
         }).send(res);
     }
 
+    async getTopBorrowedBooks(req, res) {
+        const historyBook = require('../models/historyBook.model');
+        const { Sequelize } = require('sequelize');
+
+        // Lấy top 5 bookId được mượn nhiều nhất
+        const topHistories = await historyBook.findAll({
+            attributes: ['bookId', [Sequelize.fn('COUNT', Sequelize.col('bookId')), 'borrowCount']],
+            group: ['bookId'],
+            order: [[Sequelize.literal('borrowCount'), 'DESC']],
+            limit: 5,
+            raw: true
+        });
+
+        let products = [];
+
+        if (topHistories.length === 0) {
+            // Nếu không có dữ liệu mượn, lấy 5 cuốn bất kỳ
+            products = await modelProduct.findAll({ limit: 5 });
+        } else {
+            const bookIds = topHistories.map(h => h.bookId);
+            const foundProducts = await modelProduct.findAll({
+                where: { id: bookIds },
+                raw: true
+            });
+
+            products = topHistories.map(h => {
+                const product = foundProducts.find(p => p.id === h.bookId);
+                return product ? { ...product, borrowCount: parseInt(h.borrowCount, 10) || 0 } : null;
+            }).filter(Boolean);
+
+            // Bù thêm sách nếu chưa đủ 5 cuốn
+            if (products.length < 5) {
+                const existingIds = products.map(p => p.id);
+                let moreProducts;
+                if (existingIds.length > 0) {
+                    moreProducts = await modelProduct.findAll({
+                        where: { id: { [Op.notIn]: existingIds } },
+                        limit: 5 - products.length,
+                        raw: true
+                    });
+                } else {
+                    moreProducts = await modelProduct.findAll({
+                        limit: 5 - products.length,
+                        raw: true
+                    });
+                }
+                products = [...products, ...moreProducts];
+            }
+        }
+
+        new OK({
+            message: 'Get top borrowed product success',
+            metadata: products,
+        }).send(res);
+    }
+
     async getOneProduct(req, res) {
         const { id } = req.query;
         const product = await modelProduct.findOne({ where: { id } });
